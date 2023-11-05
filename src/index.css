@@ -4,7 +4,7 @@
 
 /* common styles */
 .delete-btn {
-  @apply text-red-500 font-semibold text-lg;
+  @apply text-red-500 font-semibold text-lg rounded-md hover:underline;
 }
 
 .img-layer {
