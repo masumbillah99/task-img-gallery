@@ -17,8 +17,7 @@ import img8 from "../../assets/images/image-8.webp";
 import img9 from "../../assets/images/image-9.webp";
 import img10 from "../../assets/images/image-10.jpeg";
 import img11 from "../../assets/images/image-11.jpeg";
-import { BsFillImageFill } from "react-icons/bs";
-
+import { BsFillCloudUploadFill } from "react-icons/bs";
 import Photo from "../Photo/Photo";
 
 const PhotoGallery = () => {
@@ -56,8 +55,26 @@ const PhotoGallery = () => {
     setSelectedImg([]);
   };
 
+  // --- add / upload file ---
+  // 1. Create a reference to the hidden file input element
+  // 2. Programmatically click the hidden file input element when the Button component is clicked
+  // 3. Call a function (passed as a prop from the parent component) to handle the user-selected file
+
+  const handleFileUpload = (event) => {
+    const files = event.target.files;
+    const newImages = [];
+
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      const imageUrl = URL.createObjectURL(file);
+      newImages.push(imageUrl);
+    }
+
+    setImgArrays([...imgArrays, ...newImages]);
+  };
+
   return (
-    <section className="max-w-screen-xl mx-auto my-10 p-10 bg-gray-200 rounded-lg">
+    <section className="max-w-screen-xl mx-auto p-10 bg-white rounded-lg">
       <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
         <SortableContext items={imgArrays} strategy={rectSortingStrategy}>
           {/* heading part */}
@@ -68,7 +85,7 @@ const PhotoGallery = () => {
                   <h2 className="text-2xl font-bold">
                     <input
                       type="checkbox"
-                      className="h-4 w-4 me-2"
+                      className="h-5 w-5 me-2"
                       checked={true}
                     />
                     {selectedImg.length}{" "}
@@ -111,10 +128,22 @@ const PhotoGallery = () => {
                   setSelectedImg={setSelectedImg}
                 />
               ))}
-              <div className="flex flex-col items-center gap-3 text-center py-20 border-dashed border-2 border-slate-500 rounded-lg cursor-pointer">
-                <BsFillImageFill />
+
+              {/* upload image */}
+              <label
+                htmlFor="fileInput"
+                className="flex flex-col items-center gap-3 text-center py-20 border-dashed border-2 border-slate-500 rounded-lg cursor-pointer"
+              >
+                <input
+                  type="file"
+                  id="fileInput"
+                  className="hidden"
+                  multiple
+                  onChange={handleFileUpload}
+                />
+                <BsFillCloudUploadFill />
                 <span className="font-semibold">Add Images</span>
-              </div>
+              </label>
             </div>
           ) : (
             <div>
