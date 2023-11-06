@@ -1,0 +1,8 @@
+.check-layer {
+  opacity: 0;
+  transition: all 0.3s ease-in;
+}
+
+.img-box-layer:hover .check-layer {
+  opacity: 1;
+}

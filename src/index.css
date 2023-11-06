@@ -7,14 +7,6 @@
   @apply text-red-500 font-semibold text-lg rounded-md hover:underline;
 }
 
-.img-layer {
-  opacity: 0;
-  transition: 0.3s all ease-in;
-}
-
-.box-img:hover .img-layer {
-  opacity: 1;
-}
 
 /* .box-img img {
   transition: transform ease-in 0.2s;
